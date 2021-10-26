@@ -1,19 +1,22 @@
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
+require("dotenv").config();
+
 module.exports = {
   siteMetadata: {
     siteUrl: "https://www.yourdomain.tld",
     title: "Gatsby-Shopify",
   },
   plugins: [
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: "gatsby-source-shopify",
       options: {
-        shopName: process.env.GATSBY_API_URL,
-        accessToken: process.env.API_KEY,
+        password: process.env.PASSWORD,
+        storeUrl: process.env.STORE_URL,
       },
     },
     "gatsby-plugin-styled-components",
+    "gatsby-plugin-root-import",
   ],
 };
