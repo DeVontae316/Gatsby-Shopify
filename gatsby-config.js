@@ -1,3 +1,6 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 module.exports = {
   siteMetadata: {
     siteUrl: "https://www.yourdomain.tld",
@@ -7,8 +10,8 @@ module.exports = {
     {
       resolve: "gatsby-source-shopify",
       options: {
-        shopName: "devontaesteststore",
-        accessToken: "9947a0b3183c5924dad922a0ffb36d23",
+        shopName: process.env.GATSBY_API_URL,
+        accessToken: process.env.API_KEY,
       },
     },
     "gatsby-plugin-styled-components",
