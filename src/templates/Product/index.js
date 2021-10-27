@@ -10,7 +10,7 @@ export const pageQuery = graphql`
       description
       images {
         id
-        gatsbyImageData(width: 300)
+        gatsbyImageData(width: 300, height: 300)
       }
     }
   }
@@ -27,17 +27,7 @@ const ProductTemplate = ({ data }) => {
           <h1>product template</h1>
           {data.shopifyProduct.description}
         </div>
-        <ImageGallery img={data} />
-        {/*  <div>
-          <h1>Image here</h1>
-          <GatsbyImage
-            image={data.shopifyProduct.images[0].gatsbyImageData}
-            alt=""
-          />
-          {data.shopifyProduct.images.map((img) => {
-            return <GatsbyImage image={img.gatsbyImageData} alt="" />;
-          })}
-        </div> */}
+        <ImageGallery data={data} />
       </Grid>
     </Layout>
   );

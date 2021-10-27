@@ -23,8 +23,3 @@ export const Gallery = styled.div`
     }
   }
 `;
-
-export const ImageWrapper = styled.section`
-  cursor: pointer;
-  border: 1px solid #dcdcdc;
-`;
