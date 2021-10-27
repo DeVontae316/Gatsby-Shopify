@@ -1,16 +1,15 @@
 import React from "react";
-import Image from "components/Image";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-
 import { graphql } from "gatsby";
 import { Layout } from "components";
 import { Grid } from "./style";
+import ImageGallery from "components/ImageGallery";
 
 export const pageQuery = graphql`
   query pageQuery($shopifyId: String!) {
     shopifyProduct(shopifyId: { eq: $shopifyId }) {
       description
       images {
+        id
         gatsbyImageData(width: 300)
       }
     }
@@ -28,13 +27,17 @@ const ProductTemplate = ({ data }) => {
           <h1>product template</h1>
           {data.shopifyProduct.description}
         </div>
-        <div>
+        <ImageGallery img={data} />
+        {/*  <div>
           <h1>Image here</h1>
           <GatsbyImage
             image={data.shopifyProduct.images[0].gatsbyImageData}
             alt=""
           />
-        </div>
+          {data.shopifyProduct.images.map((img) => {
+            return <GatsbyImage image={img.gatsbyImageData} alt="" />;
+          })}
+        </div> */}
       </Grid>
     </Layout>
   );
