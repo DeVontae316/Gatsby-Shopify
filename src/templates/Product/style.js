@@ -14,3 +14,16 @@ export const Grid = styled.section`
     }
   }
 `;
+
+export const SelectWrapper = styled.div`
+  > strong {
+    display: block;
+    margin-bottom: 8px;
+  }
+`;
+
+export const Price = styled.div`
+  margin: 40px 0px;
+  font-weight: bold;
+  font-style: 30px;
+`;
