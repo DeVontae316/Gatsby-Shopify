@@ -1,23 +1,22 @@
 import React from "react";
 import { ImageWrapper } from "./style";
 import { GatsbyImage } from "gatsby-plugin-image";
+import { useGlobalImageContext } from "../../Context/ImageContext";
 
-const Images = ({ data, setId, id, setImage, image }) => {
+const Images = () => {
+  const { data, setImage, setId, id } = useGlobalImageContext();
+
   const changeImage = (imgId) => {
-    console.log(imgId);
     const filter = data.shopifyProduct.images.filter((img) =>
       img.id === imgId ? img : null
     );
-
-    console.log("test");
-    console.log(filter);
 
     setImage(filter[0].gatsbyImageData);
     setId(filter[0].id);
   };
   return (
     <div>
-      {data.shopifyProduct.images.map((i) => {
+      {data?.shopifyProduct.images.map((i) => {
         const active = id === i.id ? true : false;
 
         return (

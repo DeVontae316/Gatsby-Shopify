@@ -2,25 +2,17 @@ import React, { useState, useEffect } from "react";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Gallery } from "./style";
 import Images from "../Image(s)";
+import { useGlobalImageContext } from "../../Context/ImageContext";
 
-const ImageGallery = ({ data, img }) => {
-  const [id, setId] = useState();
-  const [image, setImage] = useState(img);
-  useEffect(() => {
-    setImage(img);
-  }, [img]);
+const ImageGallery = () => {
+  const { image } = useGlobalImageContext();
+
   return (
     <Gallery>
       <div>
         <GatsbyImage image={image} alt="" />
       </div>
-      <Images
-        img={image}
-        setImage={setImage}
-        setId={setId}
-        id={id}
-        data={data}
-      />
+      <Images />
     </Gallery>
   );
 };

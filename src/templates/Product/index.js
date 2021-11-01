@@ -6,6 +6,7 @@ import { Layout } from "components";
 import { Grid, SelectWrapper, Price } from "./style";
 import ImageGallery from "components/ImageGallery";
 import CartContext from "../../Context/CartContext";
+import { useGlobalImageContext } from "../../Context/ImageContext";
 
 export const pageQuery = graphql`
   query pageQuery($shopifyId: String!) {
@@ -36,11 +37,8 @@ export const pageQuery = graphql`
 
 const ProductTemplate = ({ data }) => {
   const { getProductById, getProductByHandle } = useContext(CartContext);
-  const [price, setPrice] = useState();
-  const [img, setImage] = useState();
-  const [variantId, setVariantId] = useState(
-    data.shopifyProduct.variants[0].id
-  );
+  const { setImage, setData, price, setPrice, variantId, setVariantId } =
+    useGlobalImageContext();
 
   const handleSelection = (e) => {
     const getPriceForVariant = data.shopifyProduct.variants.find((v) =>
@@ -61,12 +59,19 @@ const ProductTemplate = ({ data }) => {
   };
 
   useEffect(() => {
+    setData(data);
     setImage(data.shopifyProduct.variants[0].image.gatsbyImageData);
+    setPrice(data.shopifyProduct.variants[0].price);
+    setVariantId(data.shopifyProduct.variants[0].id);
+
     getProductById(data.shopifyProduct.storefrontId)
       .then((result) => {
         return console.log(result);
       })
       .catch((err) => console.log(`error message:${err})`));
+
+    console.log(`data below:`);
+    console.log(data);
   }, [getProductById]);
   return (
     <Layout>
@@ -89,7 +94,7 @@ const ProductTemplate = ({ data }) => {
           <Price>{price ? `$${price}` : null}</Price>
         </div>
 
-        <ImageGallery setImage={setImage} img={img} data={data} />
+        <ImageGallery data={data} />
       </Grid>
     </Layout>
   );
