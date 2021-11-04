@@ -37,7 +37,7 @@ export function CartContextProvider({ children }) {
         }
       }
     };
-
+    console.log("cart checkout useEffect called");
     getCheckout();
   }, [setCheckout, setSuccessfulOrder, checkoutId]);
 

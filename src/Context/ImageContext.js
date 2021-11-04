@@ -8,6 +8,8 @@ export const ImageContext = ({ children }) => {
   const [id, setId] = useState();
   const [price, setPrice] = useState();
   const [variantId, setVariantId] = useState();
+  const [shopifyId, setShopifyId] = useState();
+  const [isAvailable, setIsAvailable] = useState();
   return (
     <ImageProvider.Provider
       value={{
@@ -21,6 +23,10 @@ export const ImageContext = ({ children }) => {
         setPrice,
         variantId,
         setVariantId,
+        shopifyId,
+        setShopifyId,
+        isAvailable,
+        setIsAvailable,
       }}
     >
       {children}
